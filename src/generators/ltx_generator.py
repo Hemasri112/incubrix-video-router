@@ -18,7 +18,7 @@ class LTXVideoGenerator(VideoGenerator):
         model_name: str = "LTX-Video 2B distilled",
         model_revision: str = "ltxv-2b-0.9.6-distilled-04-25",
         model_path: Optional[str] = None,
-        license_name: str = "Apache-2.0",
+        license_name: str = "LTXV Open Weights License",
     ):
         self.model_name = model_name
         self.model_revision = model_revision

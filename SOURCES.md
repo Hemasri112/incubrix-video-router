@@ -363,14 +363,42 @@ The official Mochi repository states that Mochi 1 is released under the Apache-2
 
 ## Reported hardware
 
-The official repository reports approximately 60 GB VRAM for single-GPU execution using the repository's standard implementation.
+I reviewed it against the official sources. The structure is good, and the evidence boundary is strong. There is one important correction we should make before final submission.
+1. Important: LTX-Video license
+Your SOURCES.md currently says:
+The official LTX-Video repository is Apache-2.0 licensed.
 
-It recommends at least one H100 GPU.
+That statement is true for the repository, but your actual executed model is:
+ltxv-2b-0.9.6-distilled-04-25
 
-The repository also notes that ComfyUI can optimize Mochi to operate below 20 GB VRAM.
+The exact model/checkpoint is not Apache-2.0. Its Hugging Face model page points to the LTXV Open Weights License, dated April 17, 2025. Hugging Face
+The official LTX model documentation also explicitly links the 0.9.6-distilled-specific license separately from the repository license. Hugging Face
+So your current wording is cautious, but we should make it even clearer.
+Replace this section
+## Reported license information
 
-These are reported values, not project measurements.
+The official LTX-Video repository is Apache-2.0 licensed.
 
+The exact model/checkpoint license should be verified against the corresponding Hugging Face model card before making commercial-use claims for a specific checkpoint.
+with:
+## Reported license information
+
+The LTX-Video source repository is Apache-2.0 licensed.
+
+However, the exact checkpoint executed in this project,
+`ltxv-2b-0.9.6-distilled-04-25`, is governed by the
+LTXV Open Weights License dated April 17, 2025.
+
+Therefore, this project does NOT classify the executed LTX-Video
+checkpoint as Apache-2.0.
+
+The checkpoint license permits specified uses subject to its terms
+and use-based restrictions. Commercial-use terms depend on the
+license conditions and the status of the user/entity under those
+terms.
+
+The project therefore records the repository license and checkpoint
+license separately.
 ## Our execution status
 
 Mochi-1 was not executed in this project because the standard implementation's reported memory requirement is substantially above the available free T4 environment.

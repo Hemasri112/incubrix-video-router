@@ -15,7 +15,7 @@ def score_model(
     - text-to-video support
     - duration compatibility
     - aspect-ratio compatibility
-    - local execution availability
+    - execution evidence
     - measured runtime
     - registry priority
 
@@ -48,7 +48,8 @@ def score_model(
     else:
         score -= 5
 
-    # A locally executable model is preferable when available.
+    # Prefer models with a known execution path.
+    # This can include approved free accelerator execution.
     if model.locally_executable:
         score += 4
 
@@ -168,7 +169,7 @@ def route_request(
         "routing_status": "model_selected",
         "reason": (
             "Selected the highest-scoring compatible model "
-            "using capability, local-execution, measured-runtime "
+            "using capability, execution evidence, measured-runtime "
             "and priority evidence."
         ),
         "candidates": sorted(

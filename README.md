@@ -1,3 +1,4 @@
+Yep. Replace the **entire `README.md`** with this cleaned version. I’ve preserved your structure and made only the accuracy/documentation corrections we discussed.
 
 # IncuBrix Open-Source Draft Video Generation and Model Routing
 
@@ -24,8 +25,6 @@ The system is designed to run its planning, routing, validation, assembly, loggi
 
 At least one open/open-weight video model was executed using approved free accelerator compute.
 
----
-
 ## 2. Architecture
 
 ```text
@@ -46,15 +45,15 @@ Model Router
       +----------------------+
       |                      |
       v                      v
-Video Model             CPU/FFmpeg Fallback
+Video Model           CPU/FFmpeg Fallback
       |                      |
       +----------+-----------+
                  |
                  v
-        Video Assembly
+          Video Assembly
                  |
                  v
-            Captions
+             Captions
                  |
                  v
           Output Validation
@@ -62,14 +61,12 @@ Video Model             CPU/FFmpeg Fallback
         +--------+--------+
         |        |        |
         v        v        v
-       MP4    Timeline   Manifest
-              JSON       JSON
+       MP4    Timeline  Manifest
+                JSON      JSON
                  |
                  v
           Structured Logs
-```
 
----
 
 ## 3. Supported Workflows
 
@@ -79,12 +76,10 @@ The system currently supports three materially different workflows.
 
 Scene structure:
 
-```text
 Hook
 Concept Explanation
 Example
 Summary
-```
 
 Characteristics:
 
@@ -97,13 +92,11 @@ Characteristics:
 
 Scene structure:
 
-```text
 Headline
 Context
 Key Development
 Impact
 Closing
-```
 
 Characteristics:
 
@@ -116,13 +109,11 @@ Characteristics:
 
 Scene structure:
 
-```text
 Hook
 Problem
 Product Showcase
 Benefits
 Call To Action
-```
 
 Characteristics:
 
@@ -131,7 +122,6 @@ Characteristics:
 - dynamic visual treatment
 - short promotional captions
 
----
 
 ## 4. Input Contract
 
@@ -139,7 +129,7 @@ The system accepts a structured creative brief.
 
 Example:
 
-```json
+json
 {
     "title": "Python Variables",
     "use_case": "education",
@@ -152,7 +142,6 @@ Example:
         "clear captions"
     ]
 }
-```
 
 ### Required fields
 
@@ -169,24 +158,21 @@ Example:
 
 ### Supported use cases
 
-```text
 education
 news
 product
-```
+
 
 ### Supported aspect ratios
 
-```text
+
 16:9
 9:16
-```
+
 
 ### Duration
 
 The current planner accepts durations greater than 0 and up to 60 seconds.
-
----
 
 ## 5. Output Contract
 
@@ -198,15 +184,12 @@ Final assembled video with captions.
 
 Example:
 
-```text
 outputs/education_final.mp4
-```
+
 
 ### Editable timeline
 
-```text
 outputs/education_timeline.json
-```
 
 The timeline contains:
 
@@ -220,9 +203,7 @@ The timeline contains:
 
 ### Route decision
 
-```text
 outputs/route_decision.json
-```
 
 The routing result records:
 
@@ -230,21 +211,17 @@ The routing result records:
 - routing score
 - compatibility checks
 - license information
-- local execution status
+- execution evidence
 - measured runtime when available
 - candidate models
 
 ### Captions
 
-```text
 outputs/education_captions.srt
-```
 
 ### Manifest
 
-```text
 outputs/education_manifest.json
-```
 
 The manifest records:
 
@@ -311,14 +288,14 @@ incubrix-video-router/
 ├── outputs/
 ├── logs/
 ├── notebooks/
+├── test_pack/
+├── docs/
 │
 ├── README.md
 ├── SOURCES.md
 ├── AI_USE.md
 └── requirements.txt
-```
 
----
 
 ## 7. Local Environment
 
@@ -333,7 +310,6 @@ The local pipeline is designed for CPU execution.
 
 The project was developed and tested using Python 3.11.
 
----
 
 ## 8. Installation
 
@@ -341,40 +317,67 @@ Create and activate the virtual environment:
 
 ### Windows PowerShell
 
-```powershell
 py -3.11 -m venv .venv
 .venv\Scripts\Activate.ps1
-```
+
 
 Install dependencies:
 
-```powershell
 pip install -r requirements.txt
-```
 
 Verify Python:
 
-```powershell
 python --version
-```
 
 Verify FFmpeg:
 
-```powershell
 ffmpeg -version
-```
 
 ---
 
-## 9. Running Tests
+## 9. CLI Usage
+
+The project provides a local CLI for validation, generation and benchmarking.
+
+Show available commands:
+
+python -m src.cli --help
+
+### Validate a creative brief
+
+
+python -m src.cli validate examples\education_brief.json
+
+
+### Generate an education draft
+
+
+python -m src.cli generate examples\education_brief.json
+
+
+### Generate a news draft
+
+
+python -m src.cli generate examples\news_brief.json
+
+
+### Generate a product draft
+
+
+python -m src.cli generate examples\product_brief.json
+
+
+The generated artifacts are written to the `outputs/` directory.
+
+## 10. Running Tests
 
 Run the complete test suite:
 
-```powershell
 pytest -v
-```
 
-The project contains tests covering:
+The current automated test suite contains 43 passing tests.
+
+The tests cover:
 
 - brief validation
 - workflow planning
@@ -389,24 +392,18 @@ The project contains tests covering:
 - evaluation metrics
 - benchmark behavior
 
----
-
-## 10. Example Briefs
+## 11. Example Briefs
 
 Example briefs are provided in:
 
-```text
 examples/
-```
 
 Current examples include:
 
-```text
 examples/education_brief.json
 examples/news_brief.json
 examples/product_brief.json
 examples/benchmark_10.json
-```
 
 The benchmark file contains 10 varied briefs covering:
 
@@ -416,13 +413,15 @@ The benchmark file contains 10 varied briefs covering:
 - 16:9
 - 9:16
 
----
-
-## 11. Benchmark
+## 12. Benchmark
 
 The benchmark evaluates the local routing and assembly pipeline using 10 varied briefs.
 
-Run the benchmark using the project's benchmark entry point.
+Run the benchmark:
+
+```powershell
+python -m src.cli benchmark
+```
 
 The benchmark records:
 
@@ -438,9 +437,7 @@ The benchmark records:
 
 Benchmark artifacts are preserved under:
 
-```text
 outputs/benchmark/
-```
 
 Each benchmark case has its own directory so that previous results are not overwritten.
 
@@ -448,25 +445,23 @@ Each benchmark case has its own directory so that previous results are not overw
 
 The 10-brief benchmark measures the local routing and CPU workflow assembly pipeline.
 
-It does NOT represent ten generative-model inference runs.
+It does **not** represent ten generative-model inference runs.
 
 The current benchmark successfully rendered all 10 briefs through the local workflow assembly path.
 
 Measured benchmark result:
 
-```text
 Total briefs: 10
 Successful renders: 10
 Render success rate: 100%
 Route accuracy: 100%
 Average latency: approximately 2.10 seconds
-```
 
 The latency measurement represents local pipeline execution and should not be interpreted as video-model inference latency.
 
 ---
 
-## 12. Model Research
+## 13. Model Research
 
 Five open/open-weight video models were researched:
 
@@ -478,27 +473,23 @@ Five open/open-weight video models were researched:
 
 Detailed sources, licenses, reported hardware requirements and execution status are documented in:
 
-```text
 SOURCES.md
-```
 
 The system distinguishes reported model information from measurements performed by this project.
 
----
 
-## 13. LTX-Video Execution
+## 14. LTX-Video Execution
 
 LTX-Video was successfully executed using a free Google Colab Tesla T4 accelerator.
 
 Model revision:
 
-```text
+
 ltxv-2b-0.9.6-distilled-04-25
-```
+
 
 Measured configuration:
 
-```text
 GPU: Tesla T4
 Frames: 25
 Resolution: 512 x 768
@@ -510,15 +501,29 @@ Runtime: approximately 19 seconds
 
 The successful generation artifact was:
 
-```text
+
 ltx_baseline_test.mp4
-```
+
 
 The generated model artifact is preserved separately from the local CPU assembly pipeline.
 
+### LTX checkpoint license
+
+The LTX-Video source repository is Apache-2.0 licensed.
+
+However, the exact checkpoint executed in this project,
+
+ltxv-2b-0.9.6-distilled-04-25
+
+is governed by the **LTXV Open Weights License dated April 17, 2025**.
+
+The project therefore records the repository license and checkpoint license separately.
+
+Commercial use and redistribution must be evaluated against the applicable checkpoint license terms.
+
 ---
 
-## 14. Free Compute Execution
+## 15. Free Compute Execution
 
 The actual generative model execution is performed in an approved free accelerator environment.
 
@@ -535,107 +540,12 @@ The local laptop pipeline does not require a GPU for:
 - evaluation
 
 The successful LTX-Video execution notebook is stored/exported under:
-
-```text
-notebooks/
-```
-
-The notebook records the model revision, execution configuration, seed and generated artifact.
-
----
-
-## 15. CPU Fallback
-
-If a usable model-generated video artifact is unavailable, the local system can create a deterministic workflow video using FFmpeg.
-
-The fallback:
-
-- does not claim AI-generated content
-- creates workflow-specific visuals
-- creates the requested duration
-- supports 16:9 and 9:16
-- generates captions
-- creates timeline metadata
-- validates the final MP4
-
-The fallback allows the rest of the pipeline to remain operational even when model generation is unavailable.
-
----
-
-## 16. Validation
-
-The output validator checks:
-
-- file existence
-- non-empty output
-- MP4 output
-- FFprobe readability
-- video duration
-- expected duration tolerance
-- captions
-- timeline
-
-Asset validation additionally checks:
-
-- existence
-- file type
-- non-empty content
-- supported extension
-
----
-
-## 17. Reproducibility
-
-The project records reproducibility information including:
-
-- model name
-- model revision
-- prompt
-- seed
-- generation method
-- output path
-- license information
-- runtime when measured
-- source assets
-
-Model facts reported by external sources are explicitly separated from project measurements.
-
----
-
-## 18. Error Handling and Fallback
-
-The routing system evaluates model capabilities before selection.
-
-Compatibility checks include:
-
-- text-to-video support
-- duration
-- aspect ratio
-- local execution availability
-- measured runtime evidence
-- registry priority
-
-If generation fails or an expected model artifact is unavailable, the system records the failure and uses the local CPU assembly fallback.
-
-The fallback decision is recorded in structured output/log information.
-
----
-
-## 19. Determinism
-
-The project uses deterministic seeds where supported.
-
-The current LTX baseline execution used:
-
-```text
-Seed: 42
-```
-
+notebooks/ltx_t4_baseline.ipynb
 The seed is stored in the generation manifest.
 
----
 
-## 20. Licensing
+
+## 21. Licensing
 
 The project uses open-source/local components where possible.
 
@@ -645,11 +555,13 @@ Model licensing information is documented in:
 SOURCES.md
 ```
 
-Users must verify the current license of a model/checkpoint before redistribution or commercial use.
+The exact license of a model or checkpoint must be verified before redistribution or commercial use.
+
+In particular, the executed LTX-Video 2B distilled checkpoint is documented separately from the Apache-2.0 source repository because it is governed by the LTXV Open Weights License.
 
 ---
 
-## 21. AI-Assisted Development
+## 22. AI-Assisted Development
 
 AI coding assistance was used during development.
 
@@ -663,7 +575,7 @@ The candidate remains responsible for the final implementation, testing, debuggi
 
 ---
 
-## 22. Assessment Evidence
+## 23. Assessment Evidence
 
 The repository is structured to provide evidence for:
 
@@ -685,7 +597,7 @@ The repository is structured to provide evidence for:
 
 ---
 
-## 23. Current Limitations
+## 24. Current Limitations
 
 The following limitations are intentionally documented.
 
@@ -713,7 +625,7 @@ The current fallback path records the next candidate model when applicable, but 
 
 ---
 
-## 24. Reproduction Summary
+## 25. Reproduction Summary
 
 A CPU-only reproduction of the local orchestration pipeline requires:
 
@@ -751,7 +663,7 @@ The generative-model portion requires the approved free accelerator notebook.
 
 ---
 
-## 25. Key Files
+## 26. Key Files
 
 | File | Purpose |
 |---|---|
@@ -771,11 +683,10 @@ The generative-model portion requires the approved free accelerator notebook.
 | `src/evaluation/metrics.py` | Evaluation metrics |
 | `src/evaluation/benchmark.py` | Benchmark execution |
 | `src/pipeline.py` | End-to-end orchestration |
+| `src/cli.py` | Local CLI |
 | `SOURCES.md` | Five-model research and sources |
 | `AI_USE.md` | AI assistance disclosure |
-
----
-
-
-
+| `test_pack/TEST_PLAN.md` | Assessment test plan |
+| `docs/TECHNICAL_REPORT.md` | Technical report |
+| `notebooks/ltx_t4_baseline.ipynb` | Successful LTX T4 execution evidence |
 

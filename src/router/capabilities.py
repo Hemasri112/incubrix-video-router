@@ -7,8 +7,8 @@ class ModelCapability:
     """
     Capability and provenance information for an open video model.
 
-    Values marked as reported come from model documentation.
-    Values marked as measured must come from our own experiments.
+    Reported capabilities come from model documentation.
+    Measured values come from our own experiments.
     """
 
     name: str
@@ -27,7 +27,8 @@ class ModelCapability:
     measured_runtime_seconds: Optional[float] = None
     measured_vram_gb: Optional[float] = None
 
-    # Model availability
+    # Whether the model can be executed directly in the
+    # current local laptop environment.
     locally_executable: bool = False
 
 
@@ -52,10 +53,10 @@ MODEL_REGISTRY = [
         max_duration=20,
         supported_aspect_ratios=["16:9", "9:16"],
         priority=2,
-        license_name="Apache-2.0",
+        license_name="LTXV Open Weights License",
         source_type="reported+measured",
         measured_runtime_seconds=19.0,
-        locally_executable=True,
+        locally_executable=False,
     ),
     ModelCapability(
         name="cogvideox",
@@ -75,9 +76,9 @@ MODEL_REGISTRY = [
         supports_image_to_video=True,
         min_duration=5,
         max_duration=30,
-        supported_aspect_ratios=["16:9"],
+        supported_aspect_ratios=["16:9", "9:16"],
         priority=4,
-        license_name="Tencent Hunyuan Video license",
+        license_name="Tencent Hunyuan Community License",
         source_type="reported",
         locally_executable=False,
     ),
