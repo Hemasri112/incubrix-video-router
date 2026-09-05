@@ -1,0 +1,17 @@
+{
+    "policy": {
+        "description": "Independent expected routing policy for benchmark evaluation.",
+        "rules": [
+            {
+                "condition": "duration > 20",
+                "expected_model": "wan2.1",
+                "reason": "LTX-Video registry supports up to 20 seconds."
+            },
+            {
+                "condition": "duration <= 20 and aspect_ratio in ['16:9', '9:16']",
+                "expected_model": "ltx-video",
+                "reason": "LTX-Video is locally executable and supports both benchmark aspect ratios."
+            }
+        ]
+    }
+}

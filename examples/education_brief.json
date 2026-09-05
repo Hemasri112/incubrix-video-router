@@ -1,0 +1,12 @@
+{
+    "title": "Python Basics",
+    "use_case": "education",
+    "script": "Python is a beginner-friendly programming language. It is widely used for automation and data science.",
+    "duration": 15,
+    "aspect_ratio": "16:9",
+    "style": "clean educational",
+    "constraints": [
+        "simple visuals",
+        "clear captions"
+    ]
+}

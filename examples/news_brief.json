@@ -1,0 +1,12 @@
+{
+    "title": "Technology News Update",
+    "use_case": "news",
+    "script": "A major technology development was announced today. The development could affect how people use digital services and technology.",
+    "duration": 15,
+    "aspect_ratio": "16:9",
+    "style": "fast-paced news commentary",
+    "constraints": [
+        "headline-focused captions",
+        "clear supporting visuals"
+    ]
+}

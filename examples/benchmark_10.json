@@ -1,0 +1,92 @@
+[
+    {
+        "title": "Python Variables",
+        "use_case": "education",
+        "script": "Python variables store values that a program can use later.",
+        "duration": 15,
+        "aspect_ratio": "16:9",
+        "style": "clean educational",
+        "constraints": ["simple visuals", "clear captions"]
+    },
+    {
+        "title": "Machine Learning Basics",
+        "use_case": "education",
+        "script": "Machine learning allows computers to learn patterns from data.",
+        "duration": 20,
+        "aspect_ratio": "9:16",
+        "style": "mobile educational",
+        "constraints": ["short explanations", "clear captions"]
+    },
+    {
+        "title": "Technology Update",
+        "use_case": "news",
+        "script": "A new technology development was announced today and could affect digital services.",
+        "duration": 15,
+        "aspect_ratio": "16:9",
+        "style": "fast-paced news",
+        "constraints": ["headline-focused captions"]
+    },
+    {
+        "title": "Mobile Technology News",
+        "use_case": "news",
+        "script": "A major mobile technology update was announced with potential effects for consumers.",
+        "duration": 10,
+        "aspect_ratio": "9:16",
+        "style": "short news commentary",
+        "constraints": ["fast pacing", "short captions"]
+    },
+    {
+        "title": "Smart Product Launch",
+        "use_case": "product",
+        "script": "Introducing a smart product designed to make everyday tasks easier.",
+        "duration": 15,
+        "aspect_ratio": "9:16",
+        "style": "dynamic social advertisement",
+        "constraints": ["product-focused visuals", "short captions"]
+    },
+    {
+        "title": "Software Product Demo",
+        "use_case": "product",
+        "script": "Discover a software product that helps users organize their daily work more efficiently.",
+        "duration": 20,
+        "aspect_ratio": "16:9",
+        "style": "product demonstration",
+        "constraints": ["feature-focused visuals", "clear captions"]
+    },
+    {
+        "title": "Python Functions",
+        "use_case": "education",
+        "script": "Python functions group reusable instructions into a single block of code.",
+        "duration": 5,
+        "aspect_ratio": "16:9",
+        "style": "quick educational explainer",
+        "constraints": ["very short pacing", "simple visuals"]
+    },
+    {
+        "title": "AI Industry Update",
+        "use_case": "news",
+        "script": "The artificial intelligence industry continues to develop rapidly with new tools and applications.",
+        "duration": 20,
+        "aspect_ratio": "16:9",
+        "style": "professional news commentary",
+        "constraints": ["context and impact", "headline captions"]
+    },
+    {
+        "title": "Fitness App Promotion",
+        "use_case": "product",
+        "script": "A new fitness application helps users track workouts and build consistent routines.",
+        "duration": 10,
+        "aspect_ratio": "9:16",
+        "style": "social media promotion",
+        "constraints": ["fast pacing", "promotional captions"]
+    },
+    {
+        "title": "Data Science Introduction",
+        "use_case": "education",
+        "script": "Data science combines programming, statistics and analysis to extract useful insights from data.",
+        "duration": 30,
+        "aspect_ratio": "16:9",
+        "style": "detailed educational explainer",
+        "constraints": ["structured explanation", "clear captions"]
+    }
+]

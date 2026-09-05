@@ -1,0 +1,12 @@
+{
+    "title": "Product Launch",
+    "use_case": "product",
+    "script": "Introducing a new product designed to make everyday tasks easier. Discover the key benefits and see why it is worth trying.",
+    "duration": 15,
+    "aspect_ratio": "9:16",
+    "style": "dynamic social media advertisement",
+    "constraints": [
+        "short promotional captions",
+        "product-focused visuals"
+    ]
+}
