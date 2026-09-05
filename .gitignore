@@ -9,3 +9,4 @@ logs/*
 *.pth
 *.safetensors
 .env
+notebooks/untitled3.ipynb
