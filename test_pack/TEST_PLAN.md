@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-This test pack documents functional, failure and validation tests for the video-generation routing system.
+This test pack documents functional, failure, validation, cache/resume and end-to-end tests for the video-generation routing system.
 
 ## 2. Required Test Matrix
 
@@ -21,39 +21,31 @@ This test pack documents functional, failure and validation tests for the video-
 | Timeline | Create editable timeline | Valid timeline JSON |
 | Captions | Generate captions | Valid SRT |
 | Output validation | Validate generated MP4 | Valid output |
+| Cache/resume | Retry an interrupted matching run | Completed artifacts are reused |
+| End-to-end | Execute the complete CPU fallback path | Valid MP4, SRT, timeline and manifest |
 | Benchmark | Evaluate 10 varied briefs | Benchmark summary |
 
 ## 3. Automated Tests
 
-The automated pytest suite covers:
+Run the suite with:
 
-- planner validation
-- workflow planning
-- router behavior
-- fallback handling
-- generator behavior
-- asset validation
-- video validation
-- captions
-- timeline
-- manifest
-- workflow video generation
-- evaluation metrics
-- benchmark behavior
+```text
+python -m pytest -q
+```
 
-Current test suite result:
+The suite covers planner validation, workflow planning, router behavior, fallback handling, generator behavior, asset validation, video validation, captions, timeline, manifest, workflow video generation, evaluation metrics, benchmark behavior, cache/resume, and an explicit end-to-end pipeline path.
 
-43 tests passed.
+Expected result after the cache/resume and E2E additions:
+
+```text
+47 passed
+```
+
+The E2E test uses CPU workflow assembly. It does not invoke LTX-Video or any other model inference.
 
 ## 4. Benchmark Test
 
-The 10-brief benchmark contains:
-
-- 4 education briefs
-- 3 news briefs
-- 3 product briefs
-- 6 landscape briefs
-- 4 portrait briefs
+The 10-brief benchmark contains four education briefs, three news briefs, three product briefs, six landscape briefs and four portrait briefs.
 
 Measured result:
 
@@ -63,9 +55,7 @@ Measured result:
 - Route accuracy: 100%
 - Average local pipeline latency: approximately 2.10 seconds
 
-The benchmark latency measures routing and CPU workflow assembly.
-
-It is not generative-model inference latency.
+The benchmark latency measures routing and CPU workflow assembly. It is not generative-model inference latency.
 
 ## 5. Generative Model Evidence
 
@@ -85,24 +75,21 @@ Measured configuration:
 
 ## 6. Failure Handling
 
-The system handles:
+The system handles invalid creative briefs, unsupported workflows or aspect ratios, missing video artifacts, missing/empty/unsupported assets, invalid captions or timelines, FFmpeg failures, output validation failures, and interrupted local runs.
 
-- invalid creative briefs
-- unsupported workflows
-- unsupported aspect ratios
-- missing video artifacts
-- missing assets
-- empty assets
-- unsupported asset extensions
-- invalid captions
-- invalid timeline input
-- FFmpeg failures
-- output validation failures
+## 7. Evidence Index
 
-## 7. Evidence Boundary
+| Assessment claim | Evidence | How to verify |
+|---|---|---|
+| Three materially different workflows | `src/planner/workflows.py`, `tests/test_workflows.py` | `python -m pytest tests/test_workflows.py -q` |
+| Capability-based routing and fallback | `src/router/`, `tests/test_router.py`, `tests/test_fallback.py` | `python -m pytest tests/test_router.py tests/test_fallback.py -q` |
+| Local CPU assembly, captions and validation | `src/assembly/`, `src/validation/`, `tests/test_workflow_video.py`, `tests/test_validation.py` | `python -m pytest tests/test_workflow_video.py tests/test_validation.py -q` |
+| Complete local orchestration path | `src/pipeline.py`, `tests/test_pipeline_e2e.py` | `python -m pytest tests/test_pipeline_e2e.py -q` |
+| Cache/resume after interruption | `src/run_cache.py`, `src/pipeline.py`, `tests/test_resume.py` | `python -m pytest tests/test_resume.py -q` |
+| Deterministic provenance and manifest | `src/assembly/manifest.py`, `src/pipeline.py` | Inspect generated `outputs/runs/<run-key>/manifest.json` |
+| Ten-brief routing benchmark | `examples/benchmark_10.json`, `src/evaluation/benchmark.py`, `tests/test_benchmark.py` | `python -m src.cli benchmark --briefs examples/benchmark_10.json` |
+| Measured LTX execution | `notebooks/ltx_t4_baseline.ipynb`, `SOURCES.md`, `docs/TECHNICAL_REPORT.md` | Review the notebook and report; do not claim reported values as measured |
 
-Project measurements are explicitly separated from model-author-reported specifications.
+## 8. Evidence Boundary
 
-The five researched models are documented in SOURCES.md.
-
-Only successful project executions are described as measured executions.
+Project measurements are explicitly separated from model-author-reported specifications. The five researched models are documented in `SOURCES.md`. Only successful project executions are described as measured executions.
